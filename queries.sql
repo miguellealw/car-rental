@@ -18,18 +18,27 @@
 
 CREATE VIEW vRentalInfo AS
 SELECT 
-	re.OrderDate,
-	re.StartDate,
-	re.ReturnDate,
-	-- TODO: figure out hwo to return TotalDays per rental
+re.OrderDate, re.StartDate, re.ReturnDate, re.TotalAmount as "OrderAmount",
+-- TODO: figure out hwo to return TotalDays per rental
+v.VehicleID as "VIN", v.Description as "Vehicle",
+CASE 
+    WHEN v.Type = 1 THEN "Compact"
+    WHEN v.Type = 2 THEN "Medium"
+    WHEN v.Type = 3 THEN "Large"
+    WHEN v.Type = 4 THEN "SUV"
+    WHEN v.Type = 5 THEN "Truck"
+    WHEN v.Type = 6 THEN "Van"
+    ELSE "Unsupported vehicle type"
+END AS "Type",
+CASE
+	WHEN v.Category = 0 THEN "Basic"
+	WHEN v.Category = 1 THEN "Luxury"
+    ELSE "Unsupported vehicle category"
+END AS "Category", 
+c.CustID as "CustomerID", c.Name as "CustomerName"
+-- TODO: figure out remaining amount as RemainingBalance
 
-	v.VehicleID as "VIN",
-	v.Description as "Vehicle",
-	v.Type as "Type" -- TODO: use description of type (use switch case)
-	v.Category as "Category" -- TODO: use description of category (use switch case)
+FROM car_rental.RENTAL re, 
+INNER JOIN car_rental.CUSTOMER c ON re.CustID = c.CustID
+INNER JOIN car_rental.VEHICLE v ON re.VehicleID = v.VehicleID;
 
-	c.CustID as "CustomerID",
-	c.Name as "CustomerName",
-
-	re.TotalAmount as "OrderAmount",
-	-- TODO: figure out remaining amount as RemainingBalance
