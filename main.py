@@ -1,18 +1,6 @@
-"""
-  Tkinter
-"""
-
 import tkinter as tk
 from tkinter import * 
 from DashboardWindow import DashboardWindow
-
-import sqlite3
-from NewCustomerWindow import NewCustomerWindow
-from NewVehicleWindow import NewVehicleWindow
-
-from sql_startup import startup
-from os.path import exists
-
 from connect_to_db import connect_to_db
 
 connect_to_db()
