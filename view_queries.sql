@@ -33,12 +33,11 @@ END AS "Type",
 CASE
 	WHEN v.Category = 0 THEN "Basic"
 	WHEN v.Category = 1 THEN "Luxury"
-    ELSE "Unsupported vehicle category"
+	ELSE "Unsupported vehicle category"
 END AS "Category", 
 c.CustID as "CustomerID", c.Name as "CustomerName"
 -- TODO: figure out remaining amount as RemainingBalance
-
-FROM car_rental.RENTAL re, 
+FROM car_rental.RENTAL re
 INNER JOIN car_rental.CUSTOMER c ON re.CustID = c.CustID
 INNER JOIN car_rental.VEHICLE v ON re.VehicleID = v.VehicleID;
 
