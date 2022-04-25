@@ -10,19 +10,24 @@ from os.path import exists
 
 
 try:
-
-  # Connect to DB
-  conn = sqlite3.connect('car_rental.db')
-  print("Connected to DB successfully")
-
-  cursor = conn.cursor()
+  cursor = None
+  conn = None
 
   # only run startup script if the DB does not exist
   if not exists('./car_rental.db'):
+    # Connect to DB
+    conn = sqlite3.connect('car_rental.db')
+    print("Connected to DB successfully")
+    cursor = conn.cursor()
+
     cursor.executescript(startup)
     print("Ran startup DB script successfully")
   else:
+    conn = sqlite3.connect('car_rental.db')
+    print("Connected to DB successfully")
+    cursor = conn.cursor()
     print("DB already exists so the startup script did not run")
+
 
   conn.close()
 
