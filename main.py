@@ -5,8 +5,6 @@ from connect_to_db import connect_to_db
 
 DB_NAME = "car_rental.db"
 
-# connect_to_db()
-
 # GUI components that will be accessed through root window
 
 # TEXT BOXES, BUTTONS, LISTS
