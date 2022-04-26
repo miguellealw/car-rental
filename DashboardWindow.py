@@ -3,8 +3,9 @@ from NewCustomerWindow import NewCustomerWindow
 from NewVehicleWindow import NewVehicleWindow
 
 class DashboardWindow:
-  def __init__(self, root):
+  def __init__(self, root, conn):
     self.root = root
+    self.conn = conn
     self.title_label = tk.Label(self.root, text='Car Rental Dashboard', font=('bold'), pady=10)
     self.title_label.grid(row=0, column=0)
 
@@ -31,11 +32,11 @@ class DashboardWindow:
 
   def open_new_customer_window(self):
     self.newWindow = tk.Toplevel(self.root)
-    self.app = NewCustomerWindow(self.newWindow)
+    self.app = NewCustomerWindow(self.newWindow, self.conn)
 
   def open_add_vehicle_window(self):
     self.newWindow = tk.Toplevel(self.root)
-    self.app = NewVehicleWindow(self.newWindow)
+    self.app = NewVehicleWindow(self.newWindow, self.conn)
 
   def open_new_reservation_window(self):
     pass

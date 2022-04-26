@@ -4,8 +4,9 @@ import sqlite3
 from tkinter import messagebox
 
 class NewCustomerWindow:
-  def __init__(self, window):
+  def __init__(self, window, conn):
       self.window = window
+      self.conn = conn
       self.window.title("New Customer")
       self.window.geometry("400x400")
 
@@ -35,9 +36,8 @@ class NewCustomerWindow:
   def add_customer(self, name, phone):
 
     try:
-      conn = sqlite3.connect('car_rental.db')
       # create cursor (help create tables, perform queries, etc.)
-      cursor = conn.cursor()
+      cursor = self.conn.cursor()
 
       cursor.execute("""
         INSERT INTO CUSTOMER (Name, Phone) VALUES (:name, :phone);
@@ -46,20 +46,12 @@ class NewCustomerWindow:
         "phone": phone,
       })
 
-      conn.commit()
-
+      self.conn.commit()
       messagebox.showinfo("New Customer Created", "Customer Added Successfully!")
-
-      # close window
       self.close_window()
-
-      conn.close()
 
     except Exception as ex:
       print("Error creating customer", ex)
-      conn.close()
-    finally:
-      conn.close()
 
   def close_window(self):
     self.window.destroy()

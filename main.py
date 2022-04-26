@@ -3,7 +3,9 @@ from tkinter import *
 from DashboardWindow import DashboardWindow
 from connect_to_db import connect_to_db
 
-connect_to_db()
+DB_NAME = "car_rental.db"
+
+# connect_to_db()
 
 # GUI components that will be accessed through root window
 
@@ -47,7 +49,10 @@ def main():
   root.title('Car Rental Dashboard')
   root.geometry("400x400")
 
-  app = DashboardWindow(root)
+  conn = connect_to_db(DB_NAME)
+  # 'with' will handle closing db
+  with conn:
+    app = DashboardWindow(root, conn)
 
   # main window lop
   root.mainloop()

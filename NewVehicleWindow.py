@@ -1,8 +1,9 @@
 import tkinter as tk
 
 class NewVehicleWindow:
-  def __init__(self, window):
+  def __init__(self, window, conn):
     self.window = window
+    self.conn = conn
     self.window.title("New Vehicle")
     self.window.geometry("400x400")
 
@@ -82,6 +83,6 @@ class NewVehicleWindow:
   def add_vehicle(self):
     pass
 
-  def close_window(window):
-    window.destroy()
-    window.update()
+  def close_window(self):
+    self.window.destroy()
+    self.window.update()
