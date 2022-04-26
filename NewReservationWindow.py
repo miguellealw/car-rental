@@ -3,6 +3,7 @@ import tkinter as tk
 import sqlite3
 from tkinter import messagebox
 from tkcalendar import DateEntry
+from datetime import datetime
 
 class NewReservationWindow:
     def __init__(self, window, conn):
@@ -56,7 +57,15 @@ class NewReservationWindow:
         tk.Label(self.window, text='Date:').grid(row=3, column=0)
 
         # Start Date
-        calendar_start = DateEntry(self.window, selectmode='day')
+        # Update function for startdate
+        # Changes mindate on end date calendar
+        sel = tk.StringVar()
+        def min_end_date_upd(*args):
+            date = sel.get()
+            if (len(date) > 3):  # Date selected
+                calendar_end.config(mindate=datetime.strptime(date,'%m/%d/%y'))
+
+        calendar_start = DateEntry(self.window, selectmode='day',textvariable=sel)
         calendar_start.grid(row=3, column=1)
 
         tk.Label(self.window, text=' - ').grid(row=3, column=2)
@@ -64,5 +73,11 @@ class NewReservationWindow:
         # End Date
         calendar_end = DateEntry(self.window, selectmode='day')
         calendar_end.grid(row=3, column=4)
+
+        sel.trace('w', min_end_date_upd)
+
+    def close_window(self):
+        self.window.destroy()
+        self.window.update()
 
 

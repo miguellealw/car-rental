@@ -42,7 +42,6 @@ class DashboardWindow:
   def open_new_reservation_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = NewReservationWindow(self.newWindow, self.conn)
-    pass
 
   def open_return_car_window(self):
     pass
