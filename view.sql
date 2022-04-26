@@ -16,6 +16,7 @@
 	Order Remaining Amount as 'RentalBalance' – If there is no remaining balance return zero ‘0’
 */
 
+-- Not updateable because contains SUM and GROUP BY
 CREATE OR REPLACE VIEW vRentalInfo AS
 SELECT 
 	re.OrderDate, re.StartDate, re.ReturnDate, re.TotalAmount as "OrderAmount",
