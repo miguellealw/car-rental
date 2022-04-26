@@ -6,11 +6,10 @@
 
 
 2. The second requirement is to add all the information about a new vehicle.
-	- [ ] Submit your editable SQL query that your code executes.
+	- [x] Submit your editable SQL query that your code executes.
 
 3. The third requirement is to add all the information about a new rental reservation (this must find a free vehicle of the appropriate type and category for a specific rental period).
 	- [ ]  We assume that the customer has the right either to pay at the order or return date. Submit your editable SQL queries (select available vehicles & insert rental) that your code executes. 
-
 
 
 4. The fourth requirement is to handle the return of a rented car.
