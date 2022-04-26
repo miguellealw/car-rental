@@ -34,6 +34,7 @@ class NewCustomerWindow:
       add_customer_btn.grid(row = 5, pady=5, column = 0, columnspan = 2)
 
   def add_customer(self, name, phone):
+    # TODO: validate input
 
     try:
       # create cursor (help create tables, perform queries, etc.)

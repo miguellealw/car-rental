@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class NewVehicleWindow:
   def __init__(self, window, conn):
@@ -43,7 +44,7 @@ class NewVehicleWindow:
     type_label.grid(row=5, column=0)
 
     # Dropdown menu options
-    type_options = [
+    self.type_options = [
         "Compact",
         "Medium",
         "Large",
@@ -53,10 +54,10 @@ class NewVehicleWindow:
     ]
 
     type_v = tk.StringVar()
-    type_v.set(type_options[0])
+    type_v.set(self.type_options[0])
       
     # Create Dropdown menu
-    type_dropdown = tk.OptionMenu(self.window , type_v, *type_options )
+    type_dropdown = tk.OptionMenu(self.window , type_v, *self.type_options )
     type_dropdown.grid(row = 5, column = 1)
 
 
@@ -64,23 +65,60 @@ class NewVehicleWindow:
     category_label.grid(row=6, column=0)
 
     # Dropdown menu options
-    category_options = [
+    self.category_options = [
       "Basic", 
       "Luxury"
     ]
 
     category_v = tk.StringVar()
-    category_v.set(category_options[0])
+    category_v.set(self.category_options[0])
       
     # Create Dropdown menu
-    category_dropdown = tk.OptionMenu(self.window , category_v, *category_options )
+    category_dropdown = tk.OptionMenu(self.window , category_v, *self.category_options )
     category_dropdown.grid(row = 6, column = 1)
 
-    # Button
-    add_vehicle_btn = tk.Button(self.window, text='Add Vehicle', command = self.add_vehicle)
+    add_vehicle_btn = tk.Button(
+      self.window, 
+      text='Add Vehicle', 
+      command = lambda: self.add_vehicle(id_entry.get(), desc_entry.get(), year_entry.get(), type_v.get(), category_v.get())
+    )
     add_vehicle_btn.grid(row = 7, pady=5, column = 0, columnspan = 2)
 
-  def add_vehicle(self):
+  def add_vehicle(self, vehicle_id, description, year, type, category):
+    type_number = 1 + int(self.type_options.index( type ))
+    category_number = int(self.category_options.index( category ))
+
+
+    # TODO: validate input
+
+    try:
+      # create cursor (help create tables, perform queries, etc.)
+      cursor = self.conn.cursor()
+
+      cursor.execute("""
+        INSERT INTO VEHICLE (
+          VehicleID, 
+          Description, 
+          Year, 
+          Type, 
+          Category
+        ) VALUES (:vehicle_id, :description, :year, :type, :category);
+      """, {
+        "vehicle_id": vehicle_id,
+        "description": description,
+        "year": year,
+        "type": type_number,
+        "category": category_number,
+      })
+
+      self.conn.commit()
+      messagebox.showinfo("New Vehicle Added", "Vehicle Added Successfully!")
+      self.close_window()
+
+    except Exception as ex:
+      print("Error adding vehicle", ex)
+
+  def get_index(list, value):
     pass
 
   def close_window(self):
