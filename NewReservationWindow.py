@@ -1,7 +1,7 @@
 
 import tkinter as tk
 import sqlite3
-from tkinter import messagebox
+from tkinter import *
 from tkcalendar import DateEntry
 from datetime import datetime
 
@@ -53,8 +53,10 @@ class NewReservationWindow:
         category_dropdown.grid(row=2, column=1)
 
         # Create Date Entry Fields
-        # Date entry field
+        # Date entry container
         tk.Label(self.window, text='Date:').grid(row=3, column=0)
+        date_container = tk.Frame(self.window)
+        date_container.grid(row=3, column=1)
 
         # Start Date
         # Update function for startdate
@@ -63,18 +65,40 @@ class NewReservationWindow:
         def min_end_date_upd(*args):
             date = sel.get()
             if (len(date) > 3):  # Date selected
-                calendar_end.config(mindate=datetime.strptime(date,'%m/%d/%y'))
+                date = datetime.strptime(date,'%m/%d/%y')
+                calendar_end.config(mindate=date)
+                calendar_end.set_date(date)
 
-        calendar_start = DateEntry(self.window, selectmode='day',textvariable=sel)
-        calendar_start.grid(row=3, column=1)
+        calendar_start = DateEntry(date_container, selectmode='day', textvariable=sel)
+        calendar_start.pack(side=LEFT)
 
-        tk.Label(self.window, text=' - ').grid(row=3, column=2)
+        tk.Label(date_container, text=' - ').pack(side=LEFT)
 
         # End Date
-        calendar_end = DateEntry(self.window, selectmode='day')
-        calendar_end.grid(row=3, column=4)
+        calendar_end = DateEntry(date_container, selectmode='day', mindate=datetime.now())
+        calendar_end.pack(side=LEFT)
 
         sel.trace('w', min_end_date_upd)
+
+        # Confirm reservation button
+        reservation_button =tk.Button(
+            window,
+            text='Reserve Vehicle',
+            command=lambda: self.add_reservation(type_v.get(), category_v.get(), calendar_start.get_date(), calendar_end.get_date())
+        )
+        reservation_button.grid(row=4, pady=5, column=0, columnspan=2)
+
+
+    def add_reservation(self, vehicle_type, vehicle_category, start_date, end_date):
+        # TODO: validate input, do anything really
+
+        try:
+            # create cursor (help create tables, perform queries, etc.)
+            cursor = self.conn.cursor()
+            cursor.close()
+
+        except Exception as ex:
+            print("Error creating reservation: ", ex)
 
     def close_window(self):
         self.window.destroy()
