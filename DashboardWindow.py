@@ -1,6 +1,7 @@
 import tkinter as tk
 from NewCustomerWindow import NewCustomerWindow
 from NewVehicleWindow import NewVehicleWindow
+from ReturnRentalWindow import ReturnRentalWindow
 
 class DashboardWindow:
   def __init__(self, root, conn):
@@ -42,4 +43,5 @@ class DashboardWindow:
     pass
 
   def open_return_car_window(self):
-    pass
+    self.newWindow = tk.Toplevel(self.root)
+    self.app = ReturnRentalWindow(self.newWindow, self.conn)
