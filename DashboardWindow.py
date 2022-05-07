@@ -2,6 +2,7 @@ import tkinter as tk
 from NewCustomerWindow import NewCustomerWindow
 from NewVehicleWindow import NewVehicleWindow
 from NewReservationWindow import NewReservationWindow
+from SearchRentalsWindow import SearchRentalsWindow
 
 class DashboardWindow:
   def __init__(self, root, conn):
@@ -31,6 +32,13 @@ class DashboardWindow:
     self.return_car_btn = tk.Button(root, text='Return Car', command = self.open_return_car_window)
     self.return_car_btn.grid(row = 5, pady=5, column = 2, columnspan = 2)
 
+    # Search
+    self.reservations_label = tk.Label(self.root, text='Search')
+    self.reservations_label.grid(row = 6, column = 0)
+
+    self.search_rentals_btn = tk.Button(root, text='Search Rentals', command = self.open_search_rentals_window)
+    self.search_rentals_btn.grid(row = 7, pady=5, column = 0)
+
   def open_new_customer_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = NewCustomerWindow(self.newWindow, self.conn)
@@ -42,6 +50,11 @@ class DashboardWindow:
   def open_new_reservation_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = NewReservationWindow(self.newWindow, self.conn)
+
+  def open_search_rentals_window(self):
+    self.newWindow = tk.Toplevel(self.root)
+    self.app = SearchRentalsWindow(self.newWindow, self.conn)
+
 
   def open_return_car_window(self):
     pass
