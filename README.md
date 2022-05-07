@@ -1,3 +1,6 @@
+# To Install Dependencies
+`pip install -r requirements.txt`
+
 
 # Tasks
 
@@ -9,8 +12,7 @@
 	- [x] Submit your editable SQL query that your code executes.
 
 3. The third requirement is to add all the information about a new rental reservation (this must find a free vehicle of the appropriate type and category for a specific rental period).
-	- [ ]  We assume that the customer has the right either to pay at the order or return date. Submit your editable SQL queries (select available vehicles & insert rental) that your code executes. 
-
+	- [x]  We assume that the customer has the right either to pay at the order or return date. Submit your editable SQL queries (select available vehicles & insert rental) that your code executes. 
 
 4. The fourth requirement is to handle the return of a rented car.
 	- [ ]  This transaction should print the total customer payment due for that rental, enter it in the database and update the returned attribute accordingly. You need to be able to retrieve a rental by the return date, customer name (the table needs the id), and vehicle info. Submit your editable SQL queries (retrieve & update rental) that your code executes.

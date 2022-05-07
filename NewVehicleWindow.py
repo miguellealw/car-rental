@@ -118,9 +118,6 @@ class NewVehicleWindow:
     except Exception as ex:
       print("Error adding vehicle", ex)
 
-  def get_index(list, value):
-    pass
-
   def close_window(self):
     self.window.destroy()
     self.window.update()
