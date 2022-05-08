@@ -3,6 +3,8 @@ from NewCustomerWindow import NewCustomerWindow
 from NewVehicleWindow import NewVehicleWindow
 from ReturnRentalWindow import ReturnRentalWindow
 from NewReservationWindow import NewReservationWindow
+from CustomerSearchWindow import CustomerSearchWindow
+from VehicleSearchWindow import VehicleSearchWindow
 from SearchRentalsWindow import SearchRentalsWindow
 
 class DashboardWindow:
@@ -33,6 +35,14 @@ class DashboardWindow:
     self.return_car_btn = tk.Button(root, text='Return Car', command = self.open_return_car_window)
     self.return_car_btn.grid(row = 5, pady=5, column = 2, columnspan = 2)
 
+    # Task 5 Views
+    tk.Label(self.root, text='Search').grid(row=6, column=0)
+    self.search_user_btn = tk.Button(self.root, text='Search for User', command=self.open_user_view_window)
+    self.search_user_btn.grid(row=7, pady=5, column=0, columnspan=2)
+
+    self.search_user_btn = tk.Button(self.root, text='Search for Vehicle', command=self.open_vehicle_view_window)
+    self.search_user_btn.grid(row=7, pady=5, column=1, columnspan=2)
+
   def open_new_customer_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = NewCustomerWindow(self.newWindow, self.conn)
@@ -45,8 +55,14 @@ class DashboardWindow:
     self.newWindow = tk.Toplevel(self.root)
     self.app = NewReservationWindow(self.newWindow, self.conn)
 
-
-
   def open_return_car_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = ReturnRentalWindow(self.newWindow, self.conn)
+
+  def open_user_view_window(self):
+    self.newWindow = tk.Toplevel(self.root)
+    self.app = CustomerSearchWindow(self.newWindow, self.conn)
+
+  def open_vehicle_view_window(self):
+    self.newWindow = tk.Toplevel(self.root)
+    self.app = VehicleSearchWindow(self.newWindow, self.conn)
