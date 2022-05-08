@@ -5,7 +5,6 @@ from ReturnRentalWindow import ReturnRentalWindow
 from NewReservationWindow import NewReservationWindow
 from CustomerSearchWindow import CustomerSearchWindow
 from VehicleSearchWindow import VehicleSearchWindow
-from SearchRentalsWindow import SearchRentalsWindow
 
 class DashboardWindow:
   def __init__(self, root, conn):
