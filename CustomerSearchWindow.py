@@ -81,26 +81,26 @@ class CustomerSearchWindow:
 
             if len(uid) > 0:  # Find users with uid matching
                 cursor.execute('''
-                SELECT c.CustID, c.Name, SUM(r.TotalAmount)
-                FROM CUSTOMER c JOIN RENTAL r ON c.CustID = r.CustID
-                WHERE c.CustID = :uid
-                GROUP BY c.CustID
-                ORDER BY SUM(r.TotalAmount) DESC
+                SELECT CustomerID, CustomerName, SUM(RentalBalance)
+                FROM vRentalInfo
+                WHERE CustomerID = :uid
+                GROUP BY CustomerID
+                ORDER BY SUM(RentalBalance) DESC
                 ''', {"uid": uid})
             elif len(name) > 0:  # Find users with name like
                 cursor.execute('''
-                SELECT c.CustID, c.Name, SUM(r.TotalAmount)
-                FROM CUSTOMER c JOIN RENTAL r ON c.CustID = r.CustID
-                WHERE c.Name LIKE :name
-                GROUP BY c.CustID
-                ORDER BY SUM(r.TotalAmount) DESC
+                SELECT CustomerID, CustomerName, SUM(RentalBalance)
+                FROM vRentalInfo
+                WHERE CustomerName LIKE :name
+                GROUP BY CustomerID
+                ORDER BY SUM(RentalBalance) DESC
                 ''', {"name": '%' + name + '%'})
             else:  # Find all users
                 cursor.execute('''
-                SELECT c.CustID, c.Name, SUM(r.TotalAmount)
-                FROM CUSTOMER c JOIN RENTAL r ON c.CustID = r.CustID
-                GROUP BY c.CustID
-                ORDER BY SUM(r.TotalAmount) DESC
+                SELECT CustomerID, CustomerName, SUM(RentalBalance)
+                FROM vRentalInfo
+                GROUP BY CustomerID
+                ORDER BY SUM(RentalBalance) DESC
                 ''')
 
             return cursor.fetchall()
