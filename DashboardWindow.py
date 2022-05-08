@@ -3,6 +3,7 @@ from NewCustomerWindow import NewCustomerWindow
 from NewVehicleWindow import NewVehicleWindow
 from NewReservationWindow import NewReservationWindow
 from CustomerSearchWindow import CustomerSearchWindow
+from VehicleSearchWindow import VehicleSearchWindow
 
 class DashboardWindow:
   def __init__(self, root, conn):
@@ -37,6 +38,9 @@ class DashboardWindow:
     self.search_user_btn = tk.Button(self.root, text='Search for User', command=self.open_user_view_window)
     self.search_user_btn.grid(row=7, pady=5, column=0, columnspan=2)
 
+    self.search_user_btn = tk.Button(self.root, text='Search for Vehicle', command=self.open_vehicle_view_window)
+    self.search_user_btn.grid(row=7, pady=5, column=1, columnspan=2)
+
   def open_new_customer_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = NewCustomerWindow(self.newWindow, self.conn)
@@ -55,3 +59,7 @@ class DashboardWindow:
   def open_user_view_window(self):
     self.newWindow = tk.Toplevel(self.root)
     self.app = CustomerSearchWindow(self.newWindow, self.conn)
+
+  def open_vehicle_view_window(self):
+    self.newWindow = tk.Toplevel(self.root)
+    self.app = VehicleSearchWindow(self.newWindow, self.conn)
