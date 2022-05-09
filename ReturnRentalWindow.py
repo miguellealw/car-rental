@@ -54,7 +54,7 @@ class ReturnRentalWindow:
         category_dropdown.grid(row=5, column=1)
         '''
 
-        select_descriptions = "SELECT c.Name, v.Description, c.CustID, v.VehicleID FROM VEHICLE v, CUSTOMER c, RENTAL r WHERE r.CustID = c.CustID AND r.VehicleID = v.VehicleID"
+        select_descriptions = "SELECT c.Name, v.Description, c.CustID, v.VehicleID FROM VEHICLE v, CUSTOMER c, RENTAL r WHERE r.CustID = c.CustID AND r.VehicleID = v.VehicleID AND r.Returned = 0"
         # select_descriptions = "SELECT Returned FROM RENTAL"
         conn = self.conn.cursor()
         conn.execute(select_descriptions)
@@ -147,7 +147,7 @@ class ReturnRentalWindow:
                 
                 cursor.execute("""
                             UPDATE RENTAL
-                            SET ReturnDate = ?, PaymentDate = ?, RETURNED = 1
+                            SET ReturnDate = ?, PaymentDate = ?, RETURNED = 1, TotalAmount = 0
                             WHERE CustID = ? AND VehicleID = ?
                             """, (date, date, customer_entry, vin))
                 
@@ -164,7 +164,7 @@ class ReturnRentalWindow:
 
                 cursor.execute("""
                             UPDATE RENTAL
-                            SET Returned = 1
+                            SET Returned = 1, TotalAmount = 0
                             WHERE VehicleID = :vin
                             """, {"vin": vin})
 
