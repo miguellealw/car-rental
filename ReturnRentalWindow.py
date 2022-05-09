@@ -144,7 +144,13 @@ class ReturnRentalWindow:
                 vin = str(selected_vehicle[0])
                 print(vin)
                 date = datetime.now()
-
+                
+                cursor.execute("""
+                            UPDATE RENTAL
+                            SET ReturnDate = ?, PaymentDate = ?, RETURNED = 1
+                            WHERE CustID = ? AND VehicleID = ?
+                            """, (date, date, customer_entry, vin))
+                
                 cursor.execute("""
                             SELECT TotalAmount
                             FROM VEHICLE v, CUSTOMER c, RENTAL r, RATE ra
