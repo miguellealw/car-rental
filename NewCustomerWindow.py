@@ -34,7 +34,13 @@ class NewCustomerWindow:
       add_customer_btn.grid(row = 5, pady=5, column = 0, columnspan = 2)
 
   def add_customer(self, name, phone):
-    # TODO: validate input
+    if name.strip() == '':
+      messagebox.showerror("Invalid Name Provided", "Please provide a valid name")
+      return
+      
+    if phone.strip() == '':
+      messagebox.showerror("Invalid Phone Provided", "Please provide a valid phone")
+      return
 
     try:
       # create cursor (help create tables, perform queries, etc.)

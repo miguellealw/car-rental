@@ -88,8 +88,18 @@ class NewVehicleWindow:
     type_number = 1 + int(self.type_options.index( type ))
     category_number = int(self.category_options.index( category ))
 
+    if vehicle_id.strip() == '':
+      messagebox.showerror("Invalid Vehicle ID Provided", "Please provide a valid vehicle id")
+      return
 
-    # TODO: validate input
+    if description.strip() == '':
+      messagebox.showerror("Invalid Description Provided", "Please provide a valid description")
+      return
+    
+    if year.strip() == '' or not year.isdigit():
+      messagebox.showerror("Invalid Year Provided", "Please provide a valid Year")
+      return
+      
 
     try:
       # create cursor (help create tables, perform queries, etc.)
