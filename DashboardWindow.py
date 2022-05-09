@@ -3,7 +3,6 @@ from NewCustomerWindow import NewCustomerWindow
 from NewVehicleWindow import NewVehicleWindow
 from ReturnRentalWindow import ReturnRentalWindow
 from NewReservationWindow import NewReservationWindow
-from SearchRentalsWindow import SearchRentalsWindow
 
 class DashboardWindow:
   def __init__(self, root, conn):
