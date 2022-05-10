@@ -113,7 +113,7 @@ class ReturnRentalWindow:
             cursor.execute("""
             SELECT v.VehicleID, v.Description, ra.Daily, ra.Weekly
             FROM RENTAL r, CUSTOMER c, VEHICLE v, RATE ra
-            WHERE c.Name = :cust_name AND r.CustID = c.CustID AND v.VehicleID = r.VehicleID
+            WHERE c.Name = :cust_name AND r.CustID = c.CustID AND v.VehicleID = r.VehicleID AND r.Returned = 0
             AND v.Type = ra.Type AND v.Category = ra.Category
             AND v.Description = :v_description
             """, {
